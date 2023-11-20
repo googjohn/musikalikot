@@ -1,16 +1,26 @@
 {
   "name": "musikalikot",
   "version": "1.0.0",
-  "description": "",
+  "description": "kalikot js para sa musika",
   "main": "index.js",
   "scripts": {
     "start": "live-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "googjohn",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.6.2",
     "live-server": "^1.2.2"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/googjohn/musikalikot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/googjohn/musikalikot/issues"
+  },
+  "homepage": "https://github.com/googjohn/musikalikot#readme"
 }
