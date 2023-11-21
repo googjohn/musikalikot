@@ -112,7 +112,7 @@ a {
 }
 
 input#search {
-  border: 1px solid transparent;
+  border: none;
   width: 100%;
   padding: 10px 15px;
   border-radius: 50px;
@@ -121,7 +121,7 @@ input#search {
   box-shadow: 2px 2px  5px 0 rgba(0,0,0, .4);
 }
 
-@media screen and (max-width:660px) {
+@media screen and (max-width:740px) {
   #swap-button {
     /* display: block; */
     z-index: 100;
@@ -143,7 +143,7 @@ input#search:focus {
   position: absolute;
   /* top: 21px; */
   /* right: 35px; */
-  top: 1px;
+  top: 0;
   right: 0;
   background: linear-gradient(209deg, rgba(227,61,68,1) 25%, rgba(175,5,186,1) 66%);
   border-radius: 50%;

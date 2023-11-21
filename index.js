@@ -9,7 +9,7 @@ const songs = [
     }
   },
   {
-    'title': 'Taylor Swift - All Too Well (10 Minute Version) (Taylor\'s Version) (From the Vault)',
+    'title': 'All Too Well (10 Minute Version) (Taylor\'s Version)',
     'artist_name': 'Taylor Swift',
     'album_image': 'https://media.pitchfork.com/photos/650de105eacc5b460e151343/1:1/w_450%2Cc_limit/Taylor-Swift-1989-Taylors-Version.jpg',
     'path': 'https://drive.google.com/uc?id=1m8RnDj5eXSbQxYyqCv1AdjowLG2IBLH5',
@@ -27,7 +27,7 @@ const songs = [
     }
   },
   {
-    'title': 'Taylor Swift - White Horse (Taylor\'s Version)',
+    'title': 'White Horse (Taylor\'s Version)',
     'artist_name': 'Taylor Swift',
     'album_image': 'https://media.pitchfork.com/photos/618c3ab295b32339a9955837/1:1/w_450%2Cc_limit/Taylor-Swift-Red-Taylors-Version.jpeg',
     'path': 'https://drive.google.com/uc?id=1ReDp5pVJOScPhx8T4vt_fFVk2v5kpC5_',
@@ -45,7 +45,7 @@ const songs = [
     }
   },
   {
-    'title': 'Taylor Swift feat Ed Sheeran Run (Taylor\'s Version)(From the Vault))',
+    'title': 'Taylor Swift feat Ed Sheeran Run (Taylor\'s Version)',
     'artist_name': 'Taylor Swift',
     'album_image': 'https://media.pitchfork.com/photos/618c3ab295b32339a9955837/1:1/w_450%2Cc_limit/Taylor-Swift-Red-Taylors-Version.jpeg',
     'path': 'https://drive.google.com/uc?id=1Xs93M7RPfkvONAJBzcMYzcsziSfkspTQ',
@@ -56,29 +56,38 @@ const songs = [
 ]
 
 const audio = document.querySelector('audio');
+const playButton = document.querySelector('#play');
+const pauseButton = document.querySelector('#pause');
+const nextButton = document.querySelector('#next');
+const prevButton = document.querySelector('#back');
 let isPlaying = false;
 let currentSongIndex = 0;
 
 function songPlay() {
-  // audio.classList.toggle('active')
+
+  audio.classList.toggle('active')
+  isPlaying = true; // set current state
+  console.log('The song is played ' + isPlaying)
+
   const songUrl = songs[currentSongIndex].path;
   audio.src = songUrl;
-  isPlaying = true;
-  console.log(isPlaying)
-  audio.play();
 
   calculatePlayTime(currentSongIndex);
   currentSongDetails(currentSongIndex)
-  // seekBarProgress();
 
+  audio.play();
 }
 
 function songPause() {
-  audio.play()
+  isPlaying = false;
+  console.log('The song is paused ' + isPlaying);
+  audio.pause();
 }
 
 function songResume() {
-  audio.play()
+  isPlaying = true;
+  console.log('The song is played ' + isPlaying);
+  audio.play();
 }
 
 // function to dynamically fetch and append title and artist and image
@@ -87,6 +96,7 @@ function currentSongDetails(currentSongIndex) {
   const songImage = songs[currentSongIndex].album_image;
   const songTitle = songs[currentSongIndex].title;
   const songArtist = songs[currentSongIndex].artist_name;
+  // const songUrl = songs[currentSongIndex].url
 
   const songImageDom = document.querySelector('.song-image img');
   const songUrlDom = document.querySelector('.song-image a');
@@ -108,65 +118,119 @@ function nextSongPlay() {
   songPlay();
 }
 
+function prevSongPlay() {
+  currentSongIndex = (currentSongIndex - 1) % songs.length;
+  if (currentSongIndex < 0) {
+    currentSongIndex = songs.length - 1
+  }
+  songPlay();
+}
+
 
 const playtimeProgress = document.querySelector('#playtime-progress');
 function calculatePlayTime(currentSongIndex) {
 
-  const playTime = songs[currentSongIndex].play_time.totalMilliseconds;
   const playtimeDuration = document.querySelector('#playtime-duration');
-  console.log(playTime);
+  const playTime = songs[currentSongIndex].play_time.totalMilliseconds;
   const totalPlayTimeSeconds = playTime / 1000;
-  console.log('total duration in seconds is ' + totalPlayTimeSeconds + ' seconds');
   const totalPlayTimeMinutes = Math.floor(totalPlayTimeSeconds / 60);
-  console.log('total duration in minutes is ' + totalPlayTimeMinutes + ' minutes')
-  console.log(totalPlayTimeMinutes % 60);
   const remainingSeconds = Math.floor(totalPlayTimeSeconds % 60);
-  console.log(remainingSeconds);
   console.log(
     `${totalPlayTimeMinutes}:${remainingSeconds}`
   )
 
-  remainingSeconds < 10 ? '0' + remainingSeconds : remainingSeconds;
-  totalPlayTimeMinutes < 10 ? totalPlayTimeMinutes.toString().padStart(2, '0') : remainingSeconds;
-  playtimeDuration.textContent = `${totalPlayTimeMinutes}:${remainingSeconds}`
-  // playtimeProgress.textContent = `${}`
+  // const formattedSeconds = () => {
+  //   if (remainingSeconds < 10) {
+  //     return remainingSeconds.toLocaleString().padStart(2, '0');
+  //   }
+  // }
+
+  // const formattedMinutes = () => {
+  //   if (totalPlayTimeMinutes < 10) {
+  //     return totalPlayTimeMinutes.toLocaleString().padStart(2, '0')
+  //   }
+  // }
+
+
+
+  playtimeDuration.textContent = `${totalPlayTimeMinutes < 10 ? totalPlayTimeMinutes.toString().padStart(2, '0') : totalPlayTimeMinutes}:${remainingSeconds < 10 ? remainingSeconds.toString().padStart(2, '0') : remainingSeconds}`
+
+  const intervalId = setInterval(() => {
+
+    const songCurrentTime = Math.floor(audio.currentTime % 60);
+    const songCurrentMinute = songCurrentTime / 60;
+
+
+    playtimeProgress.textContent = `${totalPlayTimeMinutes < 10 ? totalPlayTimeMinutes.toString().padStart(2, '0') : totalPlayTimeMinutes}:${songCurrentTime < 10 ? songCurrentTime.toString().padStart(2, '0') : songCurrentTime}`;
+
+  }, 1000)
+
+  setTimeout(intervalId, 0)
+
+  let startTime = 0;
+  const seekBar = document.querySelector('#seek-Bar')
+  function seekBarProgress() {
+    const currentTime = Date.now();
+    startTime = Date.now();
+    console.log(currentTime)
+    const elapsedTime = currentTime - startTime;
+    const progress = (elapsedTime / totalPlayTimeSeconds);
+    seekBar.value = progress;
+  }
+  // seekBarProgress()
 }
 
-let startTime = 0;
-const seekBar = document.querySelector('#seek-Bar')
-function seekBarProgress() {
-  const currentTime = Date.now()
-  console.log(currentTime)
-  const elapsedTime = currentTime - startTime;
-  const progress = (elapsedTime / totalPlayTimeSeconds)
-  seekBar.value = progress;
-}
-
-let intervalId;
+// let intervalId;
 // setTimeout(
 //   intervalId = setInterval(() => {
 //     seekBarProgress();
 //   }, 1000, 0)
 // )
 
-const playButton = document.querySelector('#play');
-const pauseButton = document.querySelector('#pause');
-const resumeButton = document.querySelector('#resume');
+
 window.addEventListener('DOMContentLoaded', () => {
+});
 
-  playButton.addEventListener('click', () => {
+playButton.addEventListener('click', () => {
+
+  if (audio.classList.contains('active') && !isPlaying) {
+
+    songResume();
+    playButton.style.display = 'flex'
+    pauseButton.style.display = 'none'
+
+  } else if (!isPlaying) {
+
     songPlay();
-  })
+    playButton.classList.toggle('active')
+    playButton.style.display = 'none';
+    pauseButton.style.display = 'flex';
+  }
 
-  // pauseButton.addEventListener('click', () => {
-  //   songPause();
-  // })
+});
 
-  // resumeButton.addEventListener('click', () => {
-  //   songResume();
-  // })
+pauseButton.addEventListener('click', () => {
 
-  audio.addEventListener('ended', () => {
-    nextSongPlay();
-  });
+  if (isPlaying) {
+
+    songPause();
+    // audio.classList.remove('active')
+    playButton.classList.remove('active')
+    pauseButton.classList.remove('active')
+    playButton.style.display = 'flex'
+    pauseButton.style.display = 'none'
+  }
+
+})
+
+nextButton.addEventListener('click', () => {
+  nextSongPlay()
+});
+
+prevButton.addEventListener('click', () => {
+  prevSongPlay()
+});
+
+audio.addEventListener('ended', () => {
+  nextSongPlay();
 });
