@@ -29,7 +29,7 @@ const songs = [
   {
     'title': 'White Horse (Taylor\'s Version)',
     'artist_name': 'Taylor Swift',
-    'album_image': 'https://media.pitchfork.com/photos/618c3ab295b32339a9955837/1:1/w_450%2Cc_limit/Taylor-Swift-Red-Taylors-Version.jpeg',
+    'album_image': 'https://media.pitchfork.com/photos/650de105eacc5b460e151343/1:1/w_450%2Cc_limit/Taylor-Swift-1989-Taylors-Version.jpg',
     'path': 'https://drive.google.com/uc?id=1ReDp5pVJOScPhx8T4vt_fFVk2v5kpC5_',
     'play_time': {
       'totalMilliseconds': 234515,
@@ -127,57 +127,77 @@ function prevSongPlay() {
 }
 
 
-const playtimeProgress = document.querySelector('#playtime-progress');
 function calculatePlayTime(currentSongIndex) {
 
+  const playtimeProgress = document.querySelector('#playtime-progress');
   const playtimeDuration = document.querySelector('#playtime-duration');
-  const playTime = songs[currentSongIndex].play_time.totalMilliseconds;
-  const totalPlayTimeSeconds = playTime / 1000;
-  const totalPlayTimeMinutes = Math.floor(totalPlayTimeSeconds / 60);
-  const remainingSeconds = Math.floor(totalPlayTimeSeconds % 60);
-  console.log(
-    `${totalPlayTimeMinutes}:${remainingSeconds}`
-  )
 
-  // const formattedSeconds = () => {
-  //   if (remainingSeconds < 10) {
-  //     return remainingSeconds.toLocaleString().padStart(2, '0');
-  //   }
-  // }
+  const playTime = songs[currentSongIndex].play_time.totalMilliseconds; // total milliseconds
+  const totalPlayTimeSeconds = playTime / 1000; // total seconds
+  const totalPlayTimeMinutes = Math.floor(totalPlayTimeSeconds / 60); // total minutes
 
-  // const formattedMinutes = () => {
-  //   if (totalPlayTimeMinutes < 10) {
-  //     return totalPlayTimeMinutes.toLocaleString().padStart(2, '0')
-  //   }
-  // }
+  const remainingSeconds = totalPlayTimeSeconds % 60; // make seconds not exceed 60
+
+  // playtimeProgress.textContent = '';
 
 
+  let songProgressInterval;
+  function seekbarProgress() {
+    const seekBar = document.querySelector('#seek-bar')
 
-  playtimeDuration.textContent = `${totalPlayTimeMinutes < 10 ? totalPlayTimeMinutes.toString().padStart(2, '0') : totalPlayTimeMinutes}:${remainingSeconds < 10 ? remainingSeconds.toString().padStart(2, '0') : remainingSeconds}`
-
-  const intervalId = setInterval(() => {
-
-    const songCurrentTime = Math.floor(audio.currentTime % 60);
-    const songCurrentMinute = songCurrentTime / 60;
-
-
-    playtimeProgress.textContent = `${totalPlayTimeMinutes < 10 ? totalPlayTimeMinutes.toString().padStart(2, '0') : totalPlayTimeMinutes}:${songCurrentTime < 10 ? songCurrentTime.toString().padStart(2, '0') : songCurrentTime}`;
-
-  }, 1000)
-
-  setTimeout(intervalId, 0)
-
-  let startTime = 0;
-  const seekBar = document.querySelector('#seek-Bar')
-  function seekBarProgress() {
+    let startTime = Date.now();
     const currentTime = Date.now();
-    startTime = Date.now();
-    console.log(currentTime)
     const elapsedTime = currentTime - startTime;
-    const progress = (elapsedTime / totalPlayTimeSeconds);
+    const progress = elapsedTime / playTime;
     seekBar.value = progress;
+
+    const currentTimeSeconds = Math.floor(elapsedTime / 1000) % 60;
+    const currentTimeMinutes = Math.floor(elapsedTime / 1000 / 60);
+
+    if (currentTimeMinutes > totalPlayTimeMinutes) {
+      playtimeProgress.textContent = `${totalPlayTimeMinutes}:${remainingSeconds}`
+    } else {
+      playtimeProgress.textContent = `${currentTimeMinutes}:${currentTimeSeconds}`
+    }
+
+    playtimeDuration.textContent = `${totalPlayTimeMinutes < 10 ? totalPlayTimeMinutes.toString().padStart(2, '0') : totalPlayTimeMinutes}:${remainingSeconds < 10 ? remainingSeconds.toString().padStart(2, '0') : remainingSeconds}`
+
+    if (elapsedTime >= playTime) {
+      clearInterval(songProgressInterval)
+    }
   }
-  // seekBarProgress()
+
+
+  setTimeout(() => {
+    songProgressInterval = setInterval(() => {
+      seekbarProgress();
+    }, 1000)
+
+  }, 0)
+
+
+
+  // const songIntervalId = setInterval(() => {
+
+  //   const songCurrentTime = Math.floor(audio.currentTime % 60);
+  //   const songCurrentMinute = songCurrentTime / 60;
+
+  //   playtimeProgress.textContent = `${totalPlayTimeMinutes < 10 ? totalPlayTimeMinutes.toString().padStart(2, '0') : totalPlayTimeMinutes}:${songCurrentTime < 10 ? songCurrentTime.toString().padStart(2, '0') : songCurrentTime}`;
+
+  // }, 1000)
+
+  // setTimeout(songIntervalId, 0)
+
+  // let startTime = 0;
+  // const seekBar = document.querySelector('#seek-Bar')
+  // const currentTime = Date.now();
+  // startTime = Date.now();
+  // console.log(currentTime)
+  // const elapsedTime = currentTime - startTime;
+  // const progress = (elapsedTime / totalPlayTimeSeconds);
+  // seekBar.value = progress;
+
+
 }
 
 // let intervalId;

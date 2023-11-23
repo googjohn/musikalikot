@@ -1,0 +1,655 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Quicksand", sans-serif;
+}
+
+body {
+  background: url("https://googjohn.github.io/hosted-assets/marcela-laskoski-YrtFlrLo2DQ-unsplash.jpg")
+    no-repeat center center/cover;
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  place-content: center;
+  overflow: hidden;
+  backdrop-filter: blur(100px);
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color: black;
+}
+
+.container {
+  position: relative;
+  text-align: center;
+  max-width: 1100px;
+  height: auto;
+  border-radius: 20px;
+  padding: 10px;
+  display: flex;
+  gap: 50px;
+  margin: auto;
+}
+
+/* music player app */
+.music-player {
+  position: relative;
+  width: 380px;
+  max-height: 660px;
+  min-height: 570px;
+  border-radius: 20px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.5);
+}
+
+.music-player-card {
+  padding: 20px;
+  width: 100%;
+  max-height: 100%;
+  min-height: 570px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 15px;
+  align-items: center;
+}
+
+.music-player-card .form-container {
+  display: none;
+}
+
+.form-container {
+  position: relative;
+}
+
+.search-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 300px;
+  height: 100%;
+  cursor: pointer;
+}
+
+.search-label i {
+  background: linear-gradient(
+    209deg,
+    rgba(227, 61, 68, 1) 25%,
+    rgba(175, 5, 186, 1) 66%
+  );
+  padding: 10px;
+  border-radius: 50px;
+  color: white;
+  box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.4);
+  z-index: 2;
+}
+
+input#search {
+  border: none;
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 50px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.4);
+}
+
+input#search:focus {
+  border: 1px solid white;
+}
+
+/* responsiveness */
+@media screen and (max-width: 740px) {
+  #swap-button {
+    /* display: block; */
+    z-index: 100;
+  }
+  .search-label {
+    margin-right: 45px;
+  }
+  .music-contents {
+    display: none;
+  }
+}
+
+#swap-button {
+  /* display: none; */
+  position: absolute;
+  /* top: 21px; */
+  /* right: 35px; */
+  top: 0;
+  right: 0;
+  background: linear-gradient(
+    209deg,
+    rgba(227, 61, 68, 1) 25%,
+    rgba(175, 5, 186, 1) 66%
+  );
+  border-radius: 50%;
+  border: 0;
+  width: 36px;
+  aspect-ratio: 1;
+  color: white;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.4);
+}
+
+#swap-button i {
+  /* background: linear-gradient(209deg, rgba(227,61,68,1) 25%, rgba(175,5,186,1) 66%); */
+  /* padding: 10px; */
+  border-radius: 50px;
+  color: white;
+  font-size: 1rem;
+}
+
+.song-image {
+  width: 90%;
+  height: 240px;
+  margin: auto;
+  border-radius: 5px;
+  background: url("https://googjohn.github.io/hosted-assets/speaker.png")
+    no-repeat center right/contain;
+  /* box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.4); */
+}
+
+.song-image img {
+  width: 80%;
+  height: 100%;
+  object-fit: cover;
+  text-align: left;
+  margin-right: 20px;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+img.dynamic-song-image {
+  margin-right: 0;
+  margin-top: 0;
+}
+
+.box-shadow {
+  box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.5);
+}
+
+.artist-name {
+  margin: 5px 0;
+  font-weight: 500;
+}
+
+.song-details {
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.music-controls {
+  width: 100%;
+}
+
+.seek-progress-duration {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.song-title {
+  font-size: 1.1rem;
+}
+
+.seek-progress-duration span {
+  font-size: 0.8rem;
+}
+
+#seek-bar {
+  width: 100%;
+}
+
+.seek-bar input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: none;
+  min-height: 20px;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+input:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  background: linear-gradient(
+    209deg,
+    rgba(227, 61, 68, 1) 25%,
+    rgba(175, 5, 186, 1) 66%
+  );
+  content: "";
+  height: 4px;
+  border-radius: 50px;
+  pointer-events: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  height: 20px;
+  width: 20px;
+  z-index: 1000;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: #fff;
+  border: 4px solid #e33d44;
+  border-radius: 50%;
+  margin-top: -8px;
+  box-shadow: 5px 0 0 -8px #ffffff, 6px 0 0 -8px #ffffff, 7px 0 0 -8px #ffffff,
+    8px 0 0 -8px #ffffff, 9px 0 0 -8px #ffffff, 10px 0 0 -8px #ffffff,
+    11px 0 0 -8px #ffffff, 12px 0 0 -8px #ffffff, 13px 0 0 -8px #ffffff,
+    14px 0 0 -8px #ffffff, 15px 0 0 -8px #ffffff, 16px 0 0 -8px #ffffff,
+    17px 0 0 -8px #ffffff, 18px 0 0 -8px #ffffff, 19px 0 0 -8px #ffffff,
+    20px 0 0 -8px #ffffff, 21px 0 0 -8px #ffffff, 22px 0 0 -8px #ffffff,
+    23px 0 0 -8px #ffffff, 24px 0 0 -8px #ffffff, 25px 0 0 -8px #ffffff,
+    26px 0 0 -8px #ffffff, 27px 0 0 -8px #ffffff, 28px 0 0 -8px #ffffff,
+    29px 0 0 -8px #ffffff, 30px 0 0 -8px #ffffff, 31px 0 0 -8px #ffffff,
+    32px 0 0 -8px #ffffff, 33px 0 0 -8px #ffffff, 34px 0 0 -8px #ffffff,
+    35px 0 0 -8px #ffffff, 36px 0 0 -8px #ffffff, 37px 0 0 -8px #ffffff,
+    38px 0 0 -8px #ffffff, 39px 0 0 -8px #ffffff, 40px 0 0 -8px #ffffff,
+    41px 0 0 -8px #ffffff, 42px 0 0 -8px #ffffff, 43px 0 0 -8px #ffffff,
+    44px 0 0 -8px #ffffff, 45px 0 0 -8px #ffffff, 46px 0 0 -8px #ffffff,
+    47px 0 0 -8px #ffffff, 48px 0 0 -8px #ffffff, 49px 0 0 -8px #ffffff,
+    50px 0 0 -8px #ffffff, 51px 0 0 -8px #ffffff, 52px 0 0 -8px #ffffff,
+    53px 0 0 -8px #ffffff, 54px 0 0 -8px #ffffff, 55px 0 0 -8px #ffffff,
+    56px 0 0 -8px #ffffff, 57px 0 0 -8px #ffffff, 58px 0 0 -8px #ffffff,
+    59px 0 0 -8px #ffffff, 60px 0 0 -8px #ffffff, 61px 0 0 -8px #ffffff,
+    62px 0 0 -8px #ffffff, 63px 0 0 -8px #ffffff, 64px 0 0 -8px #ffffff,
+    65px 0 0 -8px #ffffff, 66px 0 0 -8px #ffffff, 67px 0 0 -8px #ffffff,
+    68px 0 0 -8px #ffffff, 69px 0 0 -8px #ffffff, 70px 0 0 -8px #ffffff,
+    71px 0 0 -8px #ffffff, 72px 0 0 -8px #ffffff, 73px 0 0 -8px #ffffff,
+    74px 0 0 -8px #ffffff, 75px 0 0 -8px #ffffff, 76px 0 0 -8px #ffffff,
+    77px 0 0 -8px #ffffff, 78px 0 0 -8px #ffffff, 79px 0 0 -8px #ffffff,
+    80px 0 0 -8px #ffffff, 81px 0 0 -8px #ffffff, 82px 0 0 -8px #ffffff,
+    83px 0 0 -8px #ffffff, 84px 0 0 -8px #ffffff, 85px 0 0 -8px #ffffff,
+    86px 0 0 -8px #ffffff, 87px 0 0 -8px #ffffff, 88px 0 0 -8px #ffffff,
+    89px 0 0 -8px #ffffff, 90px 0 0 -8px #ffffff, 91px 0 0 -8px #ffffff,
+    92px 0 0 -8px #ffffff, 93px 0 0 -8px #ffffff, 94px 0 0 -8px #ffffff,
+    95px 0 0 -8px #ffffff, 96px 0 0 -8px #ffffff, 97px 0 0 -8px #ffffff,
+    98px 0 0 -8px #ffffff, 99px 0 0 -8px #ffffff, 100px 0 0 -8px #ffffff,
+    101px 0 0 -8px #ffffff, 102px 0 0 -8px #ffffff, 103px 0 0 -8px #ffffff,
+    104px 0 0 -8px #ffffff, 105px 0 0 -8px #ffffff, 106px 0 0 -8px #ffffff,
+    107px 0 0 -8px #ffffff, 108px 0 0 -8px #ffffff, 109px 0 0 -8px #ffffff,
+    110px 0 0 -8px #ffffff, 111px 0 0 -8px #ffffff, 112px 0 0 -8px #ffffff,
+    113px 0 0 -8px #ffffff, 114px 0 0 -8px #ffffff, 115px 0 0 -8px #ffffff,
+    116px 0 0 -8px #ffffff, 117px 0 0 -8px #ffffff, 118px 0 0 -8px #ffffff,
+    119px 0 0 -8px #ffffff, 120px 0 0 -8px #ffffff, 121px 0 0 -8px #ffffff,
+    122px 0 0 -8px #ffffff, 123px 0 0 -8px #ffffff, 124px 0 0 -8px #ffffff,
+    125px 0 0 -8px #ffffff, 126px 0 0 -8px #ffffff, 127px 0 0 -8px #ffffff,
+    128px 0 0 -8px #ffffff, 129px 0 0 -8px #ffffff, 130px 0 0 -8px #ffffff,
+    131px 0 0 -8px #ffffff, 132px 0 0 -8px #ffffff, 133px 0 0 -8px #ffffff,
+    134px 0 0 -8px #ffffff, 135px 0 0 -8px #ffffff, 136px 0 0 -8px #ffffff,
+    137px 0 0 -8px #ffffff, 138px 0 0 -8px #ffffff, 139px 0 0 -8px #ffffff,
+    140px 0 0 -8px #ffffff, 141px 0 0 -8px #ffffff, 142px 0 0 -8px #ffffff,
+    143px 0 0 -8px #ffffff, 144px 0 0 -8px #ffffff, 145px 0 0 -8px #ffffff,
+    146px 0 0 -8px #ffffff, 147px 0 0 -8px #ffffff, 148px 0 0 -8px #ffffff,
+    149px 0 0 -8px #ffffff, 150px 0 0 -8px #ffffff, 151px 0 0 -8px #ffffff,
+    152px 0 0 -8px #ffffff, 153px 0 0 -8px #ffffff, 154px 0 0 -8px #ffffff,
+    155px 0 0 -8px #ffffff, 156px 0 0 -8px #ffffff, 157px 0 0 -8px #ffffff,
+    158px 0 0 -8px #ffffff, 159px 0 0 -8px #ffffff, 160px 0 0 -8px #ffffff,
+    161px 0 0 -8px #ffffff, 162px 0 0 -8px #ffffff, 163px 0 0 -8px #ffffff,
+    164px 0 0 -8px #ffffff, 165px 0 0 -8px #ffffff, 166px 0 0 -8px #ffffff,
+    167px 0 0 -8px #ffffff, 168px 0 0 -8px #ffffff, 169px 0 0 -8px #ffffff,
+    170px 0 0 -8px #ffffff, 171px 0 0 -8px #ffffff, 172px 0 0 -8px #ffffff,
+    173px 0 0 -8px #ffffff, 174px 0 0 -8px #ffffff, 175px 0 0 -8px #ffffff,
+    176px 0 0 -8px #ffffff, 177px 0 0 -8px #ffffff, 178px 0 0 -8px #ffffff,
+    179px 0 0 -8px #ffffff, 180px 0 0 -8px #ffffff, 181px 0 0 -8px #ffffff,
+    182px 0 0 -8px #ffffff, 183px 0 0 -8px #ffffff, 184px 0 0 -8px #ffffff,
+    185px 0 0 -8px #ffffff, 186px 0 0 -8px #ffffff, 187px 0 0 -8px #ffffff,
+    188px 0 0 -8px #ffffff, 189px 0 0 -8px #ffffff, 190px 0 0 -8px #ffffff,
+    191px 0 0 -8px #ffffff, 192px 0 0 -8px #ffffff, 193px 0 0 -8px #ffffff,
+    194px 0 0 -8px #ffffff, 195px 0 0 -8px #ffffff, 196px 0 0 -8px #ffffff,
+    197px 0 0 -8px #ffffff, 198px 0 0 -8px #ffffff, 199px 0 0 -8px #ffffff,
+    200px 0 0 -8px #ffffff, 201px 0 0 -8px #ffffff, 202px 0 0 -8px #ffffff,
+    203px 0 0 -8px #ffffff, 204px 0 0 -8px #ffffff, 205px 0 0 -8px #ffffff,
+    206px 0 0 -8px #ffffff, 207px 0 0 -8px #ffffff, 208px 0 0 -8px #ffffff,
+    209px 0 0 -8px #ffffff, 210px 0 0 -8px #ffffff, 211px 0 0 -8px #ffffff,
+    212px 0 0 -8px #ffffff, 213px 0 0 -8px #ffffff, 214px 0 0 -8px #ffffff,
+    215px 0 0 -8px #ffffff, 216px 0 0 -8px #ffffff, 217px 0 0 -8px #ffffff,
+    218px 0 0 -8px #ffffff, 219px 0 0 -8px #ffffff, 220px 0 0 -8px #ffffff,
+    221px 0 0 -8px #ffffff, 222px 0 0 -8px #ffffff, 223px 0 0 -8px #ffffff,
+    224px 0 0 -8px #ffffff, 225px 0 0 -8px #ffffff, 226px 0 0 -8px #ffffff,
+    227px 0 0 -8px #ffffff, 228px 0 0 -8px #ffffff, 229px 0 0 -8px #ffffff,
+    230px 0 0 -8px #ffffff, 231px 0 0 -8px #ffffff, 232px 0 0 -8px #ffffff,
+    233px 0 0 -8px #ffffff, 234px 0 0 -8px #ffffff, 235px 0 0 -8px #ffffff,
+    236px 0 0 -8px #ffffff, 237px 0 0 -8px #ffffff, 238px 0 0 -8px #ffffff,
+    239px 0 0 -8px #ffffff, 240px 0 0 -8px #ffffff, 241px 0 0 -8px #ffffff,
+    242px 0 0 -8px #ffffff, 243px 0 0 -8px #ffffff, 244px 0 0 -8px #ffffff,
+    245px 0 0 -8px #ffffff, 246px 0 0 -8px #ffffff, 247px 0 0 -8px #ffffff,
+    294px 0 0 -8px #ffffff, 249px 0 0 -8px #ffffff, 250px 0 0 -8px #ffffff,
+    251px 0 0 -8px #ffffff, 252px 0 0 -8px #ffffff, 253px 0 0 -8px #ffffff,
+    254px 0 0 -8px #ffffff, 255px 0 0 -8px #ffffff, 256px 0 0 -8px #ffffff,
+    257px 0 0 -8px #ffffff, 258px 0 0 -8px #ffffff, 259px 0 0 -8px #ffffff,
+    260px 0 0 -8px #ffffff, 261px 0 0 -8px #ffffff, 262px 0 0 -8px #ffffff,
+    263px 0 0 -8px #ffffff, 264px 0 0 -8px #ffffff, 265px 0 0 -8px #ffffff,
+    266px 0 0 -8px #ffffff, 267px 0 0 -8px #ffffff, 268px 0 0 -8px #ffffff,
+    269px 0 0 -8px #ffffff, 270px 0 0 -8px #ffffff, 271px 0 0 -8px #ffffff,
+    272px 0 0 -8px #ffffff, 273px 0 0 -8px #ffffff, 274px 0 0 -8px #ffffff,
+    275px 0 0 -8px #ffffff, 276px 0 0 -8px #ffffff, 277px 0 0 -8px #ffffff,
+    278px 0 0 -8px #ffffff, 279px 0 0 -8px #ffffff, 280px 0 0 -8px #ffffff,
+    281px 0 0 -8px #ffffff, 282px 0 0 -8px #ffffff, 283px 0 0 -8px #ffffff,
+    284px 0 0 -8px #ffffff, 285px 0 0 -8px #ffffff, 286px 0 0 -8px #ffffff,
+    287px 0 0 -8px #ffffff, 288px 0 0 -8px #ffffff, 289px 0 0 -8px #ffffff,
+    290px 0 0 -8px #ffffff, 291px 0 0 -8px #ffffff, 292px 0 0 -8px #ffffff,
+    293px 0 0 -8px #ffffff, 294px 0 0 -8px #ffffff, 295px 0 0 -8px #ffffff,
+    296px 0 0 -8px #ffffff, 297px 0 0 -8px #ffffff, 298px 0 0 -8px #ffffff,
+    299px 0 0 -8px #ffffff, 300px 0 0 -8px #ffffff, 301px 0 0 -8px #ffffff,
+    302px 0 0 -8px #ffffff, 303px 0 0 -8px #ffffff, 304px 0 0 -8px #ffffff,
+    305px 0 0 -8px #ffffff, 306px 0 0 -8px #ffffff, 307px 0 0 -8px #ffffff,
+    326px 0 0 -8px #ffffff, 309px 0 0 -8px #ffffff, 310px 0 0 -8px #ffffff,
+    311px 0 0 -8px #ffffff, 312px 0 0 -8px #ffffff, 313px 0 0 -8px #ffffff,
+    314px 0 0 -8px #ffffff, 315px 0 0 -8px #ffffff, 316px 0 0 -8px #ffffff,
+    317px 0 0 -8px #ffffff, 318px 0 0 -8px #ffffff, 319px 0 0 -8px #ffffff,
+    320px 0 0 -8px #ffffff, 321px 0 0 -8px #ffffff, 322px 0 0 -8px #ffffff,
+    323px 0 0 -8px #ffffff, 324px 0 0 -8px #ffffff, 325px 0 0 -8px #ffffff,
+    326px 0 0 -8px #ffffff, 327px 0 0 -8px #ffffff, 328px 0 0 -8px #ffffff;
+}
+
+input::-moz-range-track {
+  width: 100%;
+  height: 4px;
+  background: #fff;
+}
+
+input::-moz-range-thumb {
+  height: 10px;
+  width: 10px;
+  background: #fff;
+  border-radius: 50%;
+  border: 4px solid #e33d44;
+  position: relative;
+}
+
+input::-moz-range-progress {
+  height: 4px;
+  background: linear-gradient(
+    209deg,
+    rgba(227, 61, 68, 1) 25%,
+    rgba(175, 5, 186, 1) 66%
+  );
+  border: 0;
+  margin-top: 0;
+}
+
+.music-buttons {
+  position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.music-buttons button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: all 350ms ease-in-out;
+}
+
+.music-buttons button:first-child i,
+.music-buttons button:last-child i {
+  font-size: 3rem;
+  color: rgba(175, 5, 186, 0.6);
+  transition: all 350ms ease-in-out;
+}
+
+.music-buttons button:first-child:hover i,
+.music-buttons button:last-child:hover i {
+  color: rgba(227, 61, 68, 0.9);
+  transform: scale(1.15);
+  transition: all 350ms ease-in-out;
+}
+
+.music-buttons button:nth-child(2):hover i,
+.music-buttons button:nth-child(3):hover i {
+  animation: colorChange linear 5s infinite;
+  transition: all 350ms ease-in-out;
+}
+
+.music-buttons button:nth-child(2):hover,
+.music-buttons button:nth-child(3):hover {
+  transform: scale(1.05);
+  transition: all 350ms ease-in-out;
+}
+
+.active-effect {
+  animation: colorChange linear 5s infinite;
+  transition: all 350ms ease-in-out;
+}
+
+.music-buttons button:nth-child(2) i,
+.music-buttons button:nth-child(3) i {
+  color: #fff;
+  font-size: 3rem;
+  transition: all 350ms ease-in-out;
+}
+
+@keyframes colorChange {
+  0% {
+    color: rgba(0, 0, 0, 0.8);
+  }
+  25% {
+    color: rgba(175, 5, 186, 0.6);
+  }
+  50% {
+    color: rgba(227, 61, 68, 0.9);
+  }
+  75% {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  100% {
+    color: rgba(255, 255, 255, 0.7);
+  }
+}
+
+.music-buttons button:nth-child(2),
+.music-buttons button:nth-child(3) {
+  background: linear-gradient(
+    209deg,
+    rgba(227, 61, 68, 1) 25%,
+    rgba(175, 5, 186, 1) 66%
+  );
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.6);
+  height: 100px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.music-buttons button:nth-child(3) {
+  display: none;
+}
+
+/* music contents // albums // lyrics // artists */
+.music-contents {
+  color: rgba(255, 255, 255, 0.6);
+  max-width: 700px;
+  min-width: 660px;
+  height: 570px;
+}
+
+.content-header {
+  text-align: left;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.content-header #search {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.content-tabs {
+  display: flex;
+  cursor: pointer;
+  margin-bottom: 5px;
+  gap: 40px;
+}
+
+.content-tabs span {
+  font-size: 1.2rem;
+}
+
+.content-tabs span:hover {
+  color: white;
+}
+
+.content-tabs.active span {
+  font-size: 1.3;
+  font-weight: 600;
+}
+
+.album-container,
+.artists-container {
+  display: block;
+  width: 250px;
+  height: 250px;
+  transform: rotate(90deg);
+  box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
+
+.album-image,
+.artist-image {
+  height: 250px;
+  width: 250px;
+  background: linear-gradient(
+    209deg,
+    rgba(227, 61, 68, 1) 25%,
+    rgba(175, 5, 186, 1) 66%
+  );
+  backdrop-filter: blur(4px);
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.album-details {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  text-align: left;
+  margin-top: 10px;
+}
+
+.album-details a {
+  color: white;
+  font-size: 1.1rem;
+}
+
+.album-details span {
+  font-style: italic;
+}
+
+.album-image img {
+  width: 100%;
+  aspect-ratio: 1;
+}
+
+.content-details {
+  height: 470px;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    black,
+    black,
+    black,
+    black,
+    black,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    black,
+    black,
+    black,
+    black,
+    black,
+    transparent
+  );
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: auto;
+  width: 430px;
+  height: 660px;
+  gap: 20px;
+  transform: rotate(-90deg) translateX(115px) translateY(115px);
+}
+
+.song-lyrics p,
+.song-lyrics a {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 2px;
+  font-weight: 300;
+  pointer-events: none;
+}
+
+.song-lyrics {
+  position: relative;
+  height: 470px;
+  width: 550px;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  text-align: left;
+  overflow: auto;
+  -webkit-mask-image: linear-gradient(transparent, black, black, transparent);
+  mask-image: linear-gradient(transparent, black, black, transparent);
+}
+
+.song-lyrics::-webkit-scrollbar {
+  display: none;
+}
+
+::-webkit-scrollbar {
+  appearance: none;
+  border-radius: 20px;
+  width: 10px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  appearance: none;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
+  position: absolute;
+}
+
+::-webkit-scrollbar-thumb {
+  appearance: none;
+  background: linear-gradient(
+    209deg,
+    rgba(227, 61, 68, 0.9) 25%,
+    rgba(175, 5, 186, 0.9) 66%
+  );
+  border-radius: 20px;
+}
