@@ -87,9 +87,7 @@ const playButton = document.querySelector('#play');
 const pauseButton = document.querySelector('#pause');
 const nextButton = document.querySelector('#next');
 const prevButton = document.querySelector('#back');
-const lyricsTab = document.getElementById('lyrics-tab');
-const albumsTab = document.getElementById('albums-tab');
-const artistsTab = document.getElementById('artists-tab');
+
 let isPlaying = false;
 let currentSongIndex = 0;
 let startTime;
@@ -396,6 +394,10 @@ async function getRelatedArtist(endpoint) {
   }
 };
 
+const lyricsTab = document.getElementById('lyrics-tab');
+const albumsTab = document.getElementById('albums-tab');
+const artistsTab = document.getElementById('artists-tab');
+
 window.addEventListener('DOMContentLoaded', () => {
 
   // play button event listener
@@ -447,7 +449,7 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   // lyric tab event listener
-  lyricsTab.addEventListener('click', (event) => {
+  lyricsTab.addEventListener('click', () => {
     lyricsTab.classList.add('active')
     albumsTab.classList.remove('active');
     artistsTab.classList.remove('active');
@@ -455,7 +457,7 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   // artist tab event listener
-  artistsTab.addEventListener('click', (event) => {
+  artistsTab.addEventListener('click', () => {
     artistsTab.classList.add('active')
     albumsTab.classList.remove('active');
     lyricsTab.classList.remove('active');
@@ -463,7 +465,7 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   // albums tab event listener
-  albumsTab.addEventListener('click', (event) => {
+  albumsTab.addEventListener('click', () => {
     albumsTab.classList.add('active')
     artistsTab.classList.remove('active')
     lyricsTab.classList.remove('active');

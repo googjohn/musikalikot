@@ -518,7 +518,8 @@ input::-moz-range-progress {
   color: white;
 }
 
-.content-tabs.active span {
+.content-tab.active span {
+  color: white;
   font-size: 1.3;
   font-weight: 600;
 }
@@ -617,8 +618,8 @@ input::-moz-range-progress {
   position: relative;
   height: 470px;
   width: 550px;
-  padding-top: 100px;
-  padding-bottom: 100px;
+  padding-top: 80px;
+  padding-bottom: 80px;
   text-align: left;
   overflow: auto;
   -webkit-mask-image: linear-gradient(transparent, black, black, transparent);
@@ -630,6 +631,7 @@ input::-moz-range-progress {
 }
 
 ::-webkit-scrollbar {
+  display: none;
   appearance: none;
   border-radius: 20px;
   width: 10px;
