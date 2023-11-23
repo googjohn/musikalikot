@@ -331,6 +331,9 @@ async function getAlbums() {
     console.log('Error fetching Albums data from API', error)
   }
 }
+// for initial content
+getAlbums();
+
 
 // function to get artist id and use this to make request to get related artists
 async function getArtistId(currentSongIndex) {
