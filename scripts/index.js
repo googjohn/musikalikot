@@ -59,6 +59,7 @@ const songs = [
 
 const global = {
   RAPID_API_KEY: '96cc313bc6msh9eed516118e6dc5p138fc1jsnf057e04f103d',
+  RAPID_API_GENIUS_KEY: '89a844fbd9mshf5d9827da1f4d6cp1576c5jsn002121fd8bd2',
   RAPID_API_GENIUS_URL: 'https://genius-song-lyrics1.p.rapidapi.com/',
   RAPID_API_GENIUS_HOST: 'genius-song-lyrics1.p.rapidapi.com',
   RAPID_API_SPOTIFY_URL: 'https://spotify23.p.rapidapi.com/',
@@ -68,7 +69,7 @@ const global = {
 const geniusOptions = {
   method: 'GET',
   headers: {
-    'X-RapidAPI-Key': global.RAPID_API_KEY,
+    'X-RapidAPI-Key': global.RAPID_API_GENIUS_KEY,
     'X-RapidAPI-Host': global.RAPID_API_GENIUS_HOST
   }
 };
