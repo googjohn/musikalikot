@@ -70,16 +70,16 @@ const global = {
 const geniusOptions = {
   method: 'GET',
   headers: {
-    // 'X-RapidAPI-Key': global.RAPID_API_GENIUS_KEY,
-    // 'X-RapidAPI-Host': global.RAPID_API_GENIUS_HOST
+    'X-RapidAPI-Key': global.RAPID_API_GENIUS_KEY,
+    'X-RapidAPI-Host': global.RAPID_API_GENIUS_HOST
   }
 };
 
 const spotifyOptions = {
   method: 'GET',
   headers: {
-    // 'X-RapidAPI-Key': global.RAPID_API_KEY,
-    // 'X-RapidAPI-Host': global.RAPID_API_SPOTIFY_HOST
+    'X-RapidAPI-Key': global.RAPID_API_KEY,
+    'X-RapidAPI-Host': global.RAPID_API_SPOTIFY_HOST
   }
 };
 
@@ -105,7 +105,7 @@ function songPlay() {
   audio.src = songPath;
 
   currentSongDetails(currentSongIndex);
-  // getSongLyrics('song/lyrics/');
+  getSongLyrics('song/lyrics/');
 
 
   seekbarIntervalId = setInterval(() => {
@@ -334,7 +334,7 @@ async function getAlbums() {
   }
 }
 // for initial content
-// getAlbums();
+getAlbums();
 
 
 // function to get artist id and use this to make request to get related artists
@@ -498,7 +498,7 @@ window.addEventListener('DOMContentLoaded', () => {
     lyricsTab.classList.add('active')
     albumsTab.classList.remove('active');
     artistsTab.classList.remove('active');
-    // getSongLyrics('song/lyrics/');
+    getSongLyrics('song/lyrics/');
   });
 
   // artist tab event listener
@@ -506,7 +506,7 @@ window.addEventListener('DOMContentLoaded', () => {
     artistsTab.classList.add('active')
     albumsTab.classList.remove('active');
     lyricsTab.classList.remove('active');
-    // getRelatedArtist('artist_related')
+    getRelatedArtist('artist_related')
   });
 
   // albums tab event listener
@@ -514,7 +514,7 @@ window.addEventListener('DOMContentLoaded', () => {
     albumsTab.classList.add('active')
     artistsTab.classList.remove('active')
     lyricsTab.classList.remove('active');
-    // getAlbums();
+    getAlbums();
   })
 });
 
