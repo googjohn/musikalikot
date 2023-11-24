@@ -60,12 +60,12 @@ const global = {
   RAPID_API_GENIUS_KEY_5: '9cd319bd1cmsh79215895bb207c5p1ddb19jsn0e180cb44dc2', // RESERVE
   RAPID_API_GENIUS_KEY_4: '6410687375msh748b1fadd4e39eep16ff3ajsn7c2799968395', // RESERVE
   RAPID_API_GENIUS_KEY_3: '96cc313bc6msh9eed516118e6dc5p138fc1jsnf057e04f103d', // ALMOST REACHED 90
-  RAPID_API_GENIUS_KEY_2: '89a844fbd9mshf5d9827da1f4d6cp1576c5jsn002121fd8bd2', // CURRENT IN USE 73
+  RAPID_API_GENIUS_KEY_2: '89a844fbd9mshf5d9827da1f4d6cp1576c5jsn002121fd8bd2', // CALL LIMIT REACHED
   RAPID_API_GENIUS_KEY_1: '57027509admsh3f917f0e5c3e343p1317bcjsn6762b68bc036', // CALL LIMIT REACHED
   RAPID_API_SPOTIFY_KEY_5: '9cd319bd1cmsh79215895bb207c5p1ddb19jsn0e180cb44dc2', // RESEVE
   RAPID_API_SPOTIFY_KEY_4: '6410687375msh748b1fadd4e39eep16ff3ajsn7c2799968395', // RESERVE
   RAPID_API_SPOTIFY_KEY_3: '96cc313bc6msh9eed516118e6dc5p138fc1jsnf057e04f103d', // CALL LIMIT REACHED
-  RAPID_API_SPOTIFY_KEY_2: '89a844fbd9mshf5d9827da1f4d6cp1576c5jsn002121fd8bd2', // CURRENT IN USE 73
+  RAPID_API_SPOTIFY_KEY_2: '89a844fbd9mshf5d9827da1f4d6cp1576c5jsn002121fd8bd2', // CURRENT IN USE 200
   RAPID_API_SPOTIFY_KEY_1: '57027509admsh3f917f0e5c3e343p1317bcjsn6762b68bc036', // CALL LIMIT REACHED
   RAPID_API_GENIUS_URL: 'https://genius-song-lyrics1.p.rapidapi.com/',
   RAPID_API_GENIUS_HOST: 'genius-song-lyrics1.p.rapidapi.com',
@@ -77,7 +77,7 @@ const global = {
 const geniusOptions = {
   method: 'GET',
   headers: {
-    'X-RapidAPI-Key': global.RAPID_API_GENIUS_KEY_2,
+    'X-RapidAPI-Key': global.RAPID_API_GENIUS_KEY_3,
     'X-RapidAPI-Host': global.RAPID_API_GENIUS_HOST
   }
 };
@@ -113,6 +113,11 @@ function songPlay() {
 
   currentSongDetails(currentSongIndex);
   getSongLyrics('song/lyrics/');
+
+  const albumsTab = document.getElementById('albums-tab');
+  const lyricsTab = document.getElementById('lyrics-tab');
+  albumsTab.classList.remove('active');
+  lyricsTab.classList.add('active');
 
 
   seekbarIntervalId = setInterval(() => {
@@ -306,6 +311,10 @@ async function fetchSpotifyAPIData(endpoint, searchQuery) {
 
 // function to get albums
 async function getAlbums() {
+
+  const albumsTab = document.getElementById('albums-tab');
+  albumsTab.classList.add('active');
+
   const searchQuery = songs[currentSongIndex].artist_name;
   try {
 
@@ -363,6 +372,7 @@ async function getArtistId(currentSongIndex) {
 
 // function to get related artists
 async function getRelatedArtist(endpoint) {
+
   try {
     const artistId = await getArtistId(currentSongIndex);
     const getArtistsUrl = `https://spotify23.p.rapidapi.com/${endpoint}/?id=${artistId}`;
@@ -405,29 +415,6 @@ async function getRelatedArtist(endpoint) {
     console.error('Oops, we encounter a problem while fetching data', error)
   }
 };
-
-
-// for small screen navigation button
-function swap() {
-  const musicPlayer = document.querySelector('.music-player')
-  const musicContent = document.querySelector('.music-contents');
-  const swapButton = document.querySelectorAll('.swap-button');
-  // const swapButton2 = document.querySelector('.content-header .swap-button');
-
-};
-swap();
-
-// search function
-function inputValue() {
-  const input = document.querySelector('.search-label input');
-  console.log(input);
-  input.addEventListener('input', () => {
-    const inputVal = input.value
-    // console.log(inputVal)
-  })
-}
-const searchval = inputValue()
-console.log(searchval);
 
 const lyricsTab = document.getElementById('lyrics-tab');
 const albumsTab = document.getElementById('albums-tab');
@@ -506,5 +493,6 @@ window.addEventListener('DOMContentLoaded', () => {
     lyricsTab.classList.remove('active');
     getAlbums();
   })
+
 });
 
