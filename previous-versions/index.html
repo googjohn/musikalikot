@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <!-- <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest"> -->
+  <!-- font awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>musikalikot</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="music-player">
+      <div class="music-player-card">
+        <!-- <div class="form-container">
+          <button id="swap-button" type="button" role="navigation"><i
+              class="fa-solid fa-arrow-right-arrow-left"></i></button>
+          <form action="" id="form">
+            <label class="search-label" for="search">
+              <input type="search" name="search" id="search" placeholder="Search a song or an artist..."><i
+                class="fa-solid fa-magnifying-glass"></i></label>
+          </form>
+        </div> -->
+        <div class="song-image">
+          <a href=""><img src="https://googjohn.github.io/hosted-assets/headphone-no-background.png"
+              alt="album image"></a>
+        </div>
+        <div class="song-details">
+          <h1 class="song-title"><a href="">All Too Well (Taylor's Version)</a></h1>
+          <p class="artist-name">Taylor Swift</p>
+        </div>
+        <div class="music-controls">
+          <audio src="" autoplay preload="auto"></audio>
+          <div class="seek-progress-duration">
+            <span id="playtime-progress">00:00</span>
+            <span id="playtime-duration">00:00</span>
+          </div>
+          <div class="seek-bar">
+            <input type="range" id="seek-bar" step=".01" max="1" value="0">
+          </div>
+          <div class="music-buttons">
+            <button class="music-button" id="back" type="button">
+              <i class="fa-solid fa-backward-step"></i>
+            </button>
+            <button class="music-button" id="play" type="button">
+              <i class="fa-solid fa-play"></i>
+            </button>
+            <button class="music-button" id="pause" type="button">
+              <i class="fa-solid fa-pause"></i>
+            </button>
+            <button class="music-button" id="next" type="button">
+              <i class="fa-solid fa-forward-step"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="music-contents">
+      <div class="content-header">
+        <h1 class="content-head">Explore</h1>
+        <div class="form-container">
+          <button id="swap-button" type="button" role="navigation"><i
+              class="fa-solid fa-arrow-right-arrow-left"></i></button>
+          <form action="" id="form">
+            <label class="search-label" for="search">
+              <input type="search" name="search" id="search" placeholder="Search a song or an artist..."><i
+                class="fa-solid fa-magnifying-glass"></i></label>
+          </form>
+        </div>
+      </div>
+      <div class="content-tabs">
+        <div id="lyrics-tab" class="content-tab" role="button"><span>Lyrics</span></div>
+        <div id="albums-tab" class="content-tab" role="button"><span>Other Albums</span></div>
+        <div id="artists-tab" class="content-tab" role="button"><span>Related Artists</span></div>
+      </div>
+      <div class="content-details">
+        <div class="content-container">
+
+          <div class="album-container">
+            <div class="album-image">
+              <a href=""><img src="" alt=""></a>
+            </div>
+            <div class="album-details">
+              <a href="">Album Name</a>
+              <span href="">Year</span>
+            </div>
+          </div>
+          <div class="album-container">
+            <div class="album-image">
+              <a href=""><img src="" alt=""></a>
+            </div>
+            <div class="album-details">
+              <a href="">Album Name</a>
+              <span href="">Year</span>
+            </div>
+          </div>
+          <div class="album-container">
+            <div class="album-image">
+              <a href=""><img src="" alt=""></a>
+            </div>
+            <div class="album-details">
+              <a href="">Album Name</a>
+              <span href="">Year</span>
+            </div>
+          </div>
+          <div class="album-container">
+            <div class="album-image">
+              <a href=""><img src="" alt=""></a>
+            </div>
+            <div class="album-details">
+              <a href="">Album Name</a>
+              <span href="">Year</span>
+            </div>
+          </div>
+          <div class="album-container">
+            <div class="album-image">
+              <a href=""><img src="" alt=""></a>
+            </div>
+            <div class="album-details">
+              <a href="">Album Name</a>
+              <span href="">Year</span>
+            </div>
+          </div>
+          <div class="album-container">
+            <div class="album-image">
+              <a href=""><img src="" alt=""></a>
+            </div>
+            <div class="album-details">
+              <a href="">Album Name</a>
+              <span href="">Year</span>
+            </div>
+          </div>
+          <div class="album-container">
+            <div class="album-image">
+              <a href=""><img src="" alt=""></a>
+            </div>
+            <div class="album-details">
+              <a href="">Album Name</a>
+              <span href="">Year</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <audio src="" controls preload="auto"></audio>
+  <button id="play" role="button">Play</button>
+  <button id="pause" role="button">Pause</button>
+  <button id="resume" role="button">Resume</button> -->
+
+  <script src="/scripts/index.js"></script>
+  <script src="/scripts/app.js"></script>
+  <script src="/scripts/search.js"></script>
+  <script src="/scripts/fetchAPIData.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js"
+    integrity="sha512-b94Z6431JyXY14iSXwgzeZurHHRNkLt9d6bAHt7BZT38eqV+GyngIi/tVye4jBKPYQ2lBdRs0glww4fmpuLRwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+
+</html>

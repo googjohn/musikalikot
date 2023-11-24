@@ -1,20 +1,32 @@
+window.addEventListener('DOMContentLoaded', async () => {
+
 // create a global object for our api values
-const searchGlobal = {
-  RAPID_API_KEY: '96cc313bc6msh9eed516118e6dc5p138fc1jsnf057e04f103d',
+const global = {
+  RAPID_API_KEY: '57027509admsh3f917f0e5c3e343p1317bcjsn6762b68bc036',
   RAPID_API_HOST: 'genius-song-lyrics1.p.rapidapi.com',
   RAPID_API_SEARCH_URL: 'https://genius-song-lyrics1.p.rapidapi.com/search/',
 };
 
-// an object that will be passed as argument in fetching datas
-const searchQuery = document.querySelector('.song-title').textContent;
-const url = `https://genius-song-lyrics1.p.rapidapi.com/search/?q=${searchQuery}&per_page=10&page=1`;
+// save input value in a variable
+const searchQuery = getSearchValue();
+console.log(searchQuery);
+
 const options = {
   method: 'GET',
+  url: global.RAPID_API_SEARCH_URL,
+  params: {
+    q: searchQuery, // use the saved input value here as params property
+    per_page: '10',
+    page: '1',
+  },
   headers: {
-    'X-RapidAPI-Key': searchGlobal.RAPID_API_KEY,
-    'X-RapidAPI-Host': 'genius-song-lyrics1.p.rapidapi.com'
+    'Content-Type': 'application/json',
+    'X-RapidAPI-Key': global.RAPID_API_KEY,
+    'X-RapidAPI-Host': global.RAPID_API_HOST
   }
 };
+console.log(options.params.q);
+
 
 // get the search input value
 function getSearchValue () {
@@ -49,3 +61,5 @@ const search = document.getElementById('search');
 const searchButton = document.querySelector('.search-label i');
 search.addEventListener('keypress', handleSearchInput)
 searchButton.addEventListener('click', handleSearchButtonClick)
+
+});
