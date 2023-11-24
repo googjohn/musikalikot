@@ -58,8 +58,9 @@ const songs = [
 
 
 const global = {
-  RAPID_API_KEY: '96cc313bc6msh9eed516118e6dc5p138fc1jsnf057e04f103d',
-  RAPID_API_GENIUS_KEY: '89a844fbd9mshf5d9827da1f4d6cp1576c5jsn002121fd8bd2',
+  RAPID_API_KEY: '96cc313bc6msh9eed516118e6dc5p138fc1jsnf057e04f103d', // CALL LIMIT REACHED
+  RAPID_API_GENIUS_KEY: '89a844fbd9mshf5d9827da1f4d6cp1576c5jsn002121fd8bd2', // ALMOST REACHED
+  // RAPID_API_GENIUS_KEY: '57027509admsh3f917f0e5c3e343p1317bcjsn6762b68bc036', // CALL LIMIT REACHED
   RAPID_API_GENIUS_URL: 'https://genius-song-lyrics1.p.rapidapi.com/',
   RAPID_API_GENIUS_HOST: 'genius-song-lyrics1.p.rapidapi.com',
   RAPID_API_SPOTIFY_URL: 'https://spotify23.p.rapidapi.com/',
@@ -69,16 +70,16 @@ const global = {
 const geniusOptions = {
   method: 'GET',
   headers: {
-    'X-RapidAPI-Key': global.RAPID_API_GENIUS_KEY,
-    'X-RapidAPI-Host': global.RAPID_API_GENIUS_HOST
+    // 'X-RapidAPI-Key': global.RAPID_API_GENIUS_KEY,
+    // 'X-RapidAPI-Host': global.RAPID_API_GENIUS_HOST
   }
 };
 
 const spotifyOptions = {
   method: 'GET',
   headers: {
-    'X-RapidAPI-Key': global.RAPID_API_KEY,
-    'X-RapidAPI-Host': global.RAPID_API_SPOTIFY_HOST
+    // 'X-RapidAPI-Key': global.RAPID_API_KEY,
+    // 'X-RapidAPI-Host': global.RAPID_API_SPOTIFY_HOST
   }
 };
 
@@ -104,7 +105,7 @@ function songPlay() {
   audio.src = songPath;
 
   currentSongDetails(currentSongIndex);
-  getSongLyrics('song/lyrics/');
+  // getSongLyrics('song/lyrics/');
 
 
   seekbarIntervalId = setInterval(() => {
@@ -333,7 +334,7 @@ async function getAlbums() {
   }
 }
 // for initial content
-getAlbums();
+// getAlbums();
 
 
 // function to get artist id and use this to make request to get related artists
@@ -398,6 +399,46 @@ async function getRelatedArtist(endpoint) {
   }
 };
 
+
+// for small screen navigation button
+function swap() {
+  const musicPlayer = document.querySelector('.music-player')
+  const musicContent = document.querySelector('.music-contents');
+  const swapButton = document.querySelector('.music-player #swap-button');
+  const swapButton2 = document.querySelector('.content-header #swap-button');
+  if (swapButton) {
+    swapButton.addEventListener('click', (event) => {
+      const target = event.target;
+      
+      if (target) {
+        musicContent.scrollIntoView();
+      }
+    });
+  }
+  if (swapButton2) {
+    swapButton2.addEventListener('click', (event) => {
+      const target = event.target;
+      
+      if (target) {
+        document.body.scrollIntoView();
+      }
+    });
+  }
+};
+swap();
+
+// search function
+function inputValue(){ 
+  const input = document.querySelector('.search-label input');
+  console.log(input);
+  input.addEventListener('input', () => {
+    const inputVal = input.value
+    console.log(inputVal)
+  })
+}
+const searchval = inputValue()
+console.log(searchval);
+
 const lyricsTab = document.getElementById('lyrics-tab');
 const albumsTab = document.getElementById('albums-tab');
 const artistsTab = document.getElementById('artists-tab');
@@ -457,7 +498,7 @@ window.addEventListener('DOMContentLoaded', () => {
     lyricsTab.classList.add('active')
     albumsTab.classList.remove('active');
     artistsTab.classList.remove('active');
-    getSongLyrics('song/lyrics/');
+    // getSongLyrics('song/lyrics/');
   });
 
   // artist tab event listener
@@ -465,7 +506,7 @@ window.addEventListener('DOMContentLoaded', () => {
     artistsTab.classList.add('active')
     albumsTab.classList.remove('active');
     lyricsTab.classList.remove('active');
-    getRelatedArtist('artist_related')
+    // getRelatedArtist('artist_related')
   });
 
   // albums tab event listener
@@ -473,6 +514,7 @@ window.addEventListener('DOMContentLoaded', () => {
     albumsTab.classList.add('active')
     artistsTab.classList.remove('active')
     lyricsTab.classList.remove('active');
-    getAlbums();
+    // getAlbums();
   })
 });
+
