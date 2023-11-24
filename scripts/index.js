@@ -423,7 +423,7 @@ function inputValue() {
   console.log(input);
   input.addEventListener('input', () => {
     const inputVal = input.value
-    console.log(inputVal)
+    // console.log(inputVal)
   })
 }
 const searchval = inputValue()
