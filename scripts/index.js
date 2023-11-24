@@ -411,26 +411,9 @@ async function getRelatedArtist(endpoint) {
 function swap() {
   const musicPlayer = document.querySelector('.music-player')
   const musicContent = document.querySelector('.music-contents');
-  const swapButton = document.querySelector('.music-player #swap-button');
-  const swapButton2 = document.querySelector('.content-header #swap-button');
-  if (swapButton) {
-    swapButton.addEventListener('click', (event) => {
-      const target = event.target;
+  const swapButton = document.querySelectorAll('.swap-button');
+  // const swapButton2 = document.querySelector('.content-header .swap-button');
 
-      if (target) {
-        musicContent.scrollIntoView();
-      }
-    });
-  }
-  if (swapButton2) {
-    swapButton2.addEventListener('click', (event) => {
-      const target = event.target;
-
-      if (target) {
-        document.body.scrollIntoView();
-      }
-    });
-  }
 };
 swap();
 

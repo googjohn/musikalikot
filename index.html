@@ -18,15 +18,19 @@
     <div class="music-player">
       <div class="music-player-card">
         <div class="form-container">
-          <button id="swap-button" type="button" role="navigation">
-            <i class="fa-solid fa-arrow-right-arrow-left"></i>
-          </button>
           <form action="" id="form">
+            <input type="search" name="search" id="search" placeholder="Search a song or an artist..." />
             <label for="search" class="search-label">
-              <input type="search" name="search" id="search" placeholder="Search a song or an artist..." />
-              <i class="fa-solid fa-magnifying-glass"></i>
+              <button class="btn" type="button">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
             </label>
           </form>
+          <div>
+            <button class="swap-button btn" type="button">
+              <i class="fa-solid fa-arrow-right-arrow-left"></i>
+            </button>
+          </div>
         </div>
         <div class="song-image">
           <a href=""><img src="https://googjohn.github.io/hosted-assets/headphone-no-background.png"
@@ -66,17 +70,23 @@
     </div>
     <div class="music-contents">
       <div class="content-header">
-        <h1 class="content-head">Explore</h1>
+        <div>
+          <h1 class="content-head">Explore</h1>
+        </div>
         <div class="form-container">
-          <button id="swap-button" type="button" role="navigation">
-            <i class="fa-solid fa-arrow-right-arrow-left"></i>
-          </button>
           <form action="" id="form">
+            <input type="search" name="search" id="search" placeholder="Search a song or an artist..." />
             <label for="search" class="search-label">
-              <input type="search" name="search" id="search" placeholder="Search a song or an artist..." />
-              <i class="fa-solid fa-magnifying-glass"></i>
+              <button type="button" class="btn">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
             </label>
           </form>
+          <div>
+            <button class="swap-button btn" type="button" role="navigation">
+              <i class="fa-solid fa-arrow-right-arrow-left"></i>
+            </button>
+          </div>
         </div>
       </div>
       <div class="content-tabs">
