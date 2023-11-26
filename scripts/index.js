@@ -77,7 +77,7 @@ const global = {
 const geniusOptions = {
   method: 'GET',
   headers: {
-    'X-RapidAPI-Key': global.RAPID_API_GENIUS_KEY_4,
+    // 'X-RapidAPI-Key': global.RAPID_API_GENIUS_KEY_4,
     'X-RapidAPI-Host': global.RAPID_API_GENIUS_HOST
   }
 };
@@ -85,7 +85,7 @@ const geniusOptions = {
 const spotifyOptions = {
   method: 'GET',
   headers: {
-    'X-RapidAPI-Key': global.RAPID_API_SPOTIFY_KEY_2,
+    // 'X-RapidAPI-Key': global.RAPID_API_SPOTIFY_KEY_2,  
     'X-RapidAPI-Host': global.RAPID_API_SPOTIFY_HOST
   }
 };
@@ -99,6 +99,7 @@ const prevButton = document.querySelector('#back');
 
 let isPlaying = false;
 let currentSongIndex = 0;
+let progress = 0
 let startTime;
 let seekbarIntervalId;
 
@@ -106,17 +107,19 @@ let seekbarIntervalId;
 function songPlay() {
   audio.classList.toggle('active');
   isPlaying = true;
-  startTime = Date.now()
+  startTime = Date.now() - progress * (songs[currentSongIndex].play_time.totalMilliseconds)
 
   const songPath = songs[currentSongIndex].path;
   audio.src = songPath;
 
   currentSongDetails(currentSongIndex);
-  getSongLyrics('song/lyrics/');
+  // getSongLyrics('song/lyrics/');
 
   const albumsTab = document.getElementById('albums-tab');
+  const artistsTab = document.getElementById('artists-tab');
   const lyricsTab = document.getElementById('lyrics-tab');
   albumsTab.classList.remove('active');
+  artistsTab.classList.remove('active');
   lyricsTab.classList.add('active');
 
 
@@ -129,26 +132,33 @@ function songPlay() {
 
 // function to pause
 function songPause() {
-  if (isPlaying || !audio.paused) {
+  if (!audio.paused) {
     audio.pause();
-    isPlaying = false;
-  }
+    // isPlaying = false;
+  clearInterval(seekbarIntervalId);
+  } 
 }
 
 // function to resume
 function songResume() {
-  if (!isPlaying || audio.paused) {
+  if (audio.paused) {
+    startTime = Date.now() - progress * songs[currentSongIndex].play_time.totalMilliseconds;
+    seekbarIntervalId = setInterval(() => {
+      seekbarPlaytimeProgress(currentSongIndex);
+    }, 1000);
     audio.play();
-    isPlaying = true;
   }
 }
 
 // function for previous song to play
 function prevSongPlay() {
   currentSongIndex = (currentSongIndex - 1) % songs.length;
+    startTime = Date.now() - progress * songs[currentSongIndex].play_time.totalMilliseconds;
+
   if (currentSongIndex < 0) {
-    currentSongDetails = songs.length - 1;
+    currentSongIndex = songs.length - 1;
   };
+  progress = 0
   songPlay();
 }
 
@@ -157,7 +167,11 @@ function nextSongPlay() {
   // using modulo will ensure that currentSongIndex won't exceed songs length
   // works as a looping mechanisim as well - as it will always go back to 0 index
   currentSongIndex = (currentSongIndex + 1) % songs.length;
+    startTime = Date.now() - progress * songs[currentSongIndex].play_time.totalMilliseconds;
+
+  progress = 0
   songPlay();
+  
 }
 
 // function to update current song details dynamically
@@ -196,7 +210,8 @@ function seekbarPlaytimeProgress(currentSongIndex) {
 
   const currentTime = Date.now();
   const elapsed = currentTime - startTime;
-  const progress = (elapsed / playtimeDuration);
+  progress = elapsed / songs[currentSongIndex].play_time.totalMilliseconds;
+  // const progress = (elapsed / playtimeDuration);
   seekBar.value = progress;
 
   const totalSeconds = Math.floor(playtimeDuration / 1000);
@@ -350,7 +365,7 @@ async function getAlbums() {
   }
 }
 // for initial content
-getAlbums();
+// getAlbums();
 
 
 // function to get artist id and use this to make request to get related artists
@@ -425,33 +440,36 @@ window.addEventListener('DOMContentLoaded', () => {
   // play button event listener
   playButton.addEventListener('click', () => {
 
-    if (audio.classList.contains('active') && !isPlaying) {
+      if (!isPlaying) {
+        songPlay();
+        } else {
 
-      songResume();
-      playButton.style.display = 'flex'
-      pauseButton.style.display = 'none'
+        if (audio.paused) {
+          songResume();
+        } 
+        
 
-    } else if (!isPlaying) {
-
-      songPlay();
-      playButton.classList.toggle('active')
-      playButton.style.display = 'none';
-      pauseButton.style.display = 'flex';
-    }
+      }
+      playButton.classList.add('active')
+        pauseButton.classList.remove('active')
+        playButton.style.display = 'none';
+        pauseButton.style.display = 'flex';
+        console.log(isPlaying)
+      
 
   });
 
   // pause button event listener
   pauseButton.addEventListener('click', () => {
 
-    if (isPlaying) {
       songPause();
       // audio.classList.remove('active')
       playButton.classList.remove('active')
       pauseButton.classList.remove('active')
       playButton.style.display = 'flex'
       pauseButton.style.display = 'none'
-    }
+      console.log(isPlaying)
+    
   })
 
   // next button event listener
@@ -475,7 +493,7 @@ window.addEventListener('DOMContentLoaded', () => {
     lyricsTab.classList.add('active')
     albumsTab.classList.remove('active');
     artistsTab.classList.remove('active');
-    getSongLyrics('song/lyrics/');
+    // getSongLyrics('song/lyrics/');
   });
 
   // artist tab event listener

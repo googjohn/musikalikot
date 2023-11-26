@@ -1,34 +1,50 @@
 // create a global object for our api values
 const searchGlobal = {
-  RAPID_API_KEY: '96cc313bc6msh9eed516118e6dc5p138fc1jsnf057e04f103d',
-  RAPID_API_HOST: 'genius-song-lyrics1.p.rapidapi.com',
-  RAPID_API_SEARCH_URL: 'https://genius-song-lyrics1.p.rapidapi.com/search/',
+  RAPID_API_SPOTIFY_KEY: '6410687375msh748b1fadd4e39eep16ff3ajsn7c2799968395',
+  RAPID_API_SPOTIFY_URL: 'https://spotify23.p.rapidapi.com/',
+  RAPID_API_SPOTIFY_HOST: 'spotify23.p.rapidapi.com',
 };
 
-// an object that will be passed as argument in fetching datas
-const searchQuery = document.querySelector('.song-title').textContent;
-const url = `https://genius-song-lyrics1.p.rapidapi.com/search/?q=${searchQuery}&per_page=10&page=1`;
-const options = {
+// take input value as search query
+const searchQuery = document.querySelectorAll('.search');
+let inputValue;
+let searchThis;
+console.log(searchQuery);
+  for (const query of searchQuery) {
+    query.addEventListener('input', (event) => {
+      inputValue = query.value
+      console.log(inputValue)
+      searchThis = inputValue;
+      handleSearchInput(event)
+    })
+  }
+
+  console.log(searchThis)
+
+const spotify = {
   method: 'GET',
   headers: {
-    'X-RapidAPI-Key': searchGlobal.RAPID_API_KEY,
-    'X-RapidAPI-Host': 'genius-song-lyrics1.p.rapidapi.com'
+    'X-RapidAPI-Key': searchGlobal.RAPID_API_SPOTIFY_KEY,
+    'X-RapidAPI-Host': searchGlobal.RAPID_API_SPOTIFY_HOST
   }
 };
 
-// get the search input value
-function getSearchValue () {
-  const search = document.getElementById('search');
-  const searchValue = search.value;
-  return searchValue;
-};
-
 // function for fetching data: artists data, songs/tracks data, albums data,
-async function fetchData(options) {
-  try {
-    const response = await axios.request(options)
-    console.log(response.data);
+async function searchFetchData(endpoint) {
+  const searchUrl = `https://spotify23.p.rapidapi.com/search/?q=${encodeURIComponent(searchThis)}&type=${endpoint}&offset=0&limit=20&numberOfTopResults=5`;
 
+  try {
+    const response = await fetch(searchUrl, spotify)
+    console.log(response);
+
+    if(!response.ok) {
+      console.error('There was an error receiving response', response.statusText)
+    }
+
+    const result = response.json();
+    console.log(result);
+
+    return result;
   } catch (error) {
     console.log('Something went wrong, please read', error)
   }
@@ -36,16 +52,19 @@ async function fetchData(options) {
 
 // get value after enter keypress
 function handleSearchInput(event) {
+  // event.preventDefault();
   if (event.key === 'Enter') {
-    fetchData(options);
+    searchFetchData('albums');
   }
 }
 
-function handleSearchButtonClick() {
-  fetchData(options);
-}
 
-const search = document.getElementById('search');
-const searchButton = document.querySelector('.search-label i');
-search.addEventListener('keypress', handleSearchInput)
-searchButton.addEventListener('click', handleSearchButtonClick)
+function handleSearchButtonClick(event) {
+  // event.preventDefault();
+  if (event) {
+    searchFetchData('albums');
+  }
+}
+handleSearchButtonClick()
+
+
