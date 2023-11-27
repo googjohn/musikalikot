@@ -77,7 +77,7 @@ const global = {
 const geniusOptions = {
   method: 'GET',
   headers: {
-    // 'X-RapidAPI-Key': global.RAPID_API_GENIUS_KEY_4,
+    'X-RapidAPI-Key': global.RAPID_API_GENIUS_KEY_4,
     'X-RapidAPI-Host': global.RAPID_API_GENIUS_HOST
   }
 };
@@ -85,7 +85,7 @@ const geniusOptions = {
 const spotifyOptions = {
   method: 'GET',
   headers: {
-    // 'X-RapidAPI-Key': global.RAPID_API_SPOTIFY_KEY_2,  
+    'X-RapidAPI-Key': global.RAPID_API_SPOTIFY_KEY_2,  
     'X-RapidAPI-Host': global.RAPID_API_SPOTIFY_HOST
   }
 };
@@ -113,7 +113,7 @@ function songPlay() {
   audio.src = songPath;
 
   currentSongDetails(currentSongIndex);
-  // getSongLyrics('song/lyrics/');
+  getSongLyrics('song/lyrics/');
 
   const albumsTab = document.getElementById('albums-tab');
   const artistsTab = document.getElementById('artists-tab');
@@ -365,7 +365,7 @@ async function getAlbums() {
   }
 }
 // for initial content
-// getAlbums();
+getAlbums();
 
 
 // function to get artist id and use this to make request to get related artists
@@ -493,7 +493,7 @@ window.addEventListener('DOMContentLoaded', () => {
     lyricsTab.classList.add('active')
     albumsTab.classList.remove('active');
     artistsTab.classList.remove('active');
-    // getSongLyrics('song/lyrics/');
+    getSongLyrics('song/lyrics/');
   });
 
   // artist tab event listener
