@@ -77,7 +77,7 @@ const global = {
 const geniusOptions = {
   method: 'GET',
   headers: {
-    'X-RapidAPI-Key': global.RAPID_API_GENIUS_KEY_4,
+    'X-RapidAPI-Key': global.RAPID_API_GENIUS_KEY_5,
     'X-RapidAPI-Host': global.RAPID_API_GENIUS_HOST
   }
 };
@@ -85,7 +85,7 @@ const geniusOptions = {
 const spotifyOptions = {
   method: 'GET',
   headers: {
-    'X-RapidAPI-Key': global.RAPID_API_SPOTIFY_KEY_2,  
+    'X-RapidAPI-Key': global.RAPID_API_SPOTIFY_KEY_4,  
     'X-RapidAPI-Host': global.RAPID_API_SPOTIFY_HOST
   }
 };
