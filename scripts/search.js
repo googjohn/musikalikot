@@ -1,70 +1,96 @@
 // create a global object for our api values
 const searchGlobal = {
-  RAPID_API_SPOTIFY_KEY: '6410687375msh748b1fadd4e39eep16ff3ajsn7c2799968395',
-  RAPID_API_SPOTIFY_URL: 'https://spotify23.p.rapidapi.com/',
-  RAPID_API_SPOTIFY_HOST: 'spotify23.p.rapidapi.com',
+  RAPID_API_SPOTIFY_KEY: "6410687375msh748b1fadd4e39eep16ff3ajsn7c2799968395",
+  RAPID_API_SPOTIFY_URL: "https://spotify23.p.rapidapi.com/",
+  RAPID_API_SPOTIFY_HOST: "spotify23.p.rapidapi.com",
+};
+
+const spotify_options = {
+  method: "GET",
+  headers: {
+    "X-RapidAPI-Key": searchGlobal.RAPID_API_SPOTIFY_KEY,
+    "X-RapidAPI-Host": searchGlobal.RAPID_API_SPOTIFY_HOST,
+  },
 };
 
 // take input value as search query
-const searchQuery = document.querySelectorAll('.search');
+const searchQuery = document.querySelectorAll(".search");
 let inputValue;
 let searchThis;
-console.log(searchQuery);
-  for (const query of searchQuery) {
-    query.addEventListener('input', (event) => {
-      inputValue = query.value
-      console.log(inputValue)
-      searchThis = inputValue;
-      handleSearchInput(event)
-    })
-  }
+for (const query of searchQuery) {
+  query.addEventListener("input", () => {
+    inputValue = query.value;
+  });
+}
 
-  console.log(searchThis)
+// add event listener to search form for submission/searching
+const searchFromPlayer = document.querySelector("#music-player-form");
+const searchFromContent = document.querySelector("#music-content-form");
 
-const spotify = {
-  method: 'GET',
-  headers: {
-    'X-RapidAPI-Key': searchGlobal.RAPID_API_SPOTIFY_KEY,
-    'X-RapidAPI-Host': searchGlobal.RAPID_API_SPOTIFY_HOST
-  }
-};
+searchFromPlayer.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const input = searchFromPlayer.querySelector('.search')
+  inputValue = input.value
+  searchFetchData("albums", inputValue);
+  input.value = '';
+});
+
+searchFromContent.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const input = searchFromContent.querySelector('.search')
+  inputValue = input.value
+  searchFetchData("albums", inputValue);
+  input.value = '';
+});
 
 // function for fetching data: artists data, songs/tracks data, albums data,
-async function searchFetchData(endpoint) {
-  const searchUrl = `https://spotify23.p.rapidapi.com/search/?q=${encodeURIComponent(searchThis)}&type=${endpoint}&offset=0&limit=20&numberOfTopResults=5`;
+async function searchFetchData(endpoint, searchThis) {
+  const searchUrl = `https://spotify23.p.rapidapi.com/search/?q=${encodeURIComponent(
+    searchThis
+  )}&type=${endpoint}&offset=0&limit=20&numberOfTopResults=5`;
+
+  const albumsTab = document.getElementById("albums-tab");
+  const lyricsTab = document.getElementById('lyrics-tab');
+  const artistsTab = document.getElementById('artists-tab');
+  albumsTab.classList.add("active");
+  artistsTab.classList.remove("active");
+  lyricsTab.classList.remove("active");
 
   try {
-    const response = await fetch(searchUrl, spotify)
-    console.log(response);
+    const response = await fetch(searchUrl, spotify_options);
 
-    if(!response.ok) {
-      console.error('There was an error receiving response', response.statusText)
+    if (!response.ok) {
+      throw new Error(
+        "There was an error receiving response",
+        response.statusText
+      );
     }
 
-    const result = response.json();
-    console.log(result);
+    const { albums } = await response.json();
+    const items = albums.items;
 
-    return result;
+    // display search result
+    const contentDetails = document.querySelector(".content-details");
+    const contentContainer = document.createElement("div");
+    contentContainer.classList.add("content-container");
+    contentDetails.innerHTML = "";
+
+    items.forEach((item) => {
+      const albumUrl = item.data.uri;
+      const content = document.createElement("div");
+      content.classList.add("album-container");
+      content.innerHTML = `<div class="album-image">
+            <a href=${albumUrl} target="_blank"><img src=${item.data.coverArt.sources[2].url}></a>
+          </div>
+          <div class="album-details">
+              <a href=${albumUrl} target="_blank"><p>${item.data.name}</p></a> 
+              <span>${item.data.date.year}</span>
+          </div>`;
+
+      contentContainer.appendChild(content);
+      contentDetails.appendChild(contentContainer);
+    });
   } catch (error) {
-    console.log('Something went wrong, please read', error)
-  }
-};
-
-// get value after enter keypress
-function handleSearchInput(event) {
-  // event.preventDefault();
-  if (event.key === 'Enter') {
-    searchFetchData('albums');
+    console.log("Something went wrong, error fetching data: ", error);
   }
 }
-
-
-function handleSearchButtonClick(event) {
-  // event.preventDefault();
-  if (event) {
-    searchFetchData('albums');
-  }
-}
-handleSearchButtonClick()
-
-

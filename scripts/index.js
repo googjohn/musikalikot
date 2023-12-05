@@ -153,12 +153,11 @@ function songResume() {
 // function for previous song to play
 function prevSongPlay() {
   currentSongIndex = (currentSongIndex - 1) % songs.length;
-    startTime = Date.now() - progress * songs[currentSongIndex].play_time.totalMilliseconds;
-
   if (currentSongIndex < 0) {
     currentSongIndex = songs.length - 1;
   };
-  progress = 0
+  startTime = Date.now() - progress * songs[currentSongIndex].play_time.totalMilliseconds;
+  progress = 0;
   songPlay();
 }
 
@@ -167,7 +166,7 @@ function nextSongPlay() {
   // using modulo will ensure that currentSongIndex won't exceed songs length
   // works as a looping mechanisim as well - as it will always go back to 0 index
   currentSongIndex = (currentSongIndex + 1) % songs.length;
-    startTime = Date.now() - progress * songs[currentSongIndex].play_time.totalMilliseconds;
+  startTime = Date.now() - progress * songs[currentSongIndex].play_time.totalMilliseconds;
 
   progress = 0
   songPlay();
@@ -440,21 +439,20 @@ window.addEventListener('DOMContentLoaded', () => {
   // play button event listener
   playButton.addEventListener('click', () => {
 
-      if (!isPlaying) {
-        songPlay();
-        } else {
-
-        if (audio.paused) {
-          songResume();
-        } 
-        
-
-      }
-      playButton.classList.add('active')
-        pauseButton.classList.remove('active')
-        playButton.style.display = 'none';
-        pauseButton.style.display = 'flex';
-        console.log(isPlaying)
+    if (!isPlaying) {
+      songPlay();
+      } else {
+      if (audio.paused) {
+        songResume();
+      } 
+      
+    }
+    
+    playButton.classList.add('active')
+    pauseButton.classList.remove('active')
+    playButton.style.display = 'none';
+    pauseButton.style.display = 'flex';
+    console.log(isPlaying)
       
 
   });
@@ -462,24 +460,32 @@ window.addEventListener('DOMContentLoaded', () => {
   // pause button event listener
   pauseButton.addEventListener('click', () => {
 
-      songPause();
-      // audio.classList.remove('active')
-      playButton.classList.remove('active')
-      pauseButton.classList.remove('active')
-      playButton.style.display = 'flex'
-      pauseButton.style.display = 'none'
-      console.log(isPlaying)
+    songPause();
+    // audio.classList.remove('active')
+    playButton.classList.remove('active')
+    pauseButton.classList.remove('active')
+    playButton.style.display = 'flex'
+    pauseButton.style.display = 'none'
+    console.log(isPlaying)
     
   })
 
   // next button event listener
   nextButton.addEventListener('click', () => {
     nextSongPlay()
+    playButton.classList.add('active')
+    pauseButton.classList.remove('active')
+    playButton.style.display = 'none';
+    pauseButton.style.display = 'flex';
   });
 
   // prev button event listener
   prevButton.addEventListener('click', () => {
     prevSongPlay()
+    playButton.classList.add('active')
+    pauseButton.classList.remove('active')
+    playButton.style.display = 'none';
+    pauseButton.style.display = 'flex';
   });
 
   // audio event listener
