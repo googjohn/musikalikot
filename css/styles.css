@@ -811,3 +811,12 @@ input::-moz-range-progress {
   }
   
 }
+
+@media screen and (max-width: 400px) {
+  .container {
+    padding: 15px 5px;
+  }
+  .music-contents {
+    padding : 30px 5px;
+  }
+}
