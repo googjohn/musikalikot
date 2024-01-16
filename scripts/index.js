@@ -4,7 +4,8 @@ const songs = [
     'title': 'Love Story (Taylor\'s Version)',
     'artist_name': 'Taylor Swift',
     'album_image': 'https://media.pitchfork.com/photos/606f5e145aedaea021481c20/1:1/w_450%2Cc_limit/Taylor-Swift-Fearless.jpeg',
-    'path': 'https://drive.google.com/uc?id=1Te5bqL7D0Eu-onNVCKGycI62esA7OCPR',
+    'path': 'https://audio.jukehost.co.uk/EquBYYonZQyCmPFomjAXCuOWMAWzGRVB',
+    // 'path': 'https://od.lk/s/NzlfNDgxMzk2NzVf/taylor-swift-love-story-taylor-s-version.mp3',
     'play_time': {
       'totalMilliseconds': 235766,
     }
@@ -13,7 +14,8 @@ const songs = [
     'title': 'All Too Well (10 Minute Version) (Taylor\'s Version)',
     'artist_name': 'Taylor Swift',
     'album_image': 'https://media.pitchfork.com/photos/650de105eacc5b460e151343/1:1/w_450%2Cc_limit/Taylor-Swift-1989-Taylors-Version.jpg',
-    'path': 'https://drive.google.com/uc?id=1m8RnDj5eXSbQxYyqCv1AdjowLG2IBLH5',
+    'path': 'https://audio.jukehost.co.uk/VLz4FfcQ9Eo4857FbUEXab7asnSNwXQ6',
+    // 'path': 'https://od.lk/s/NzlfNDgxMzk2NzJf/taylor-swift-all-too-well-10-minute-version.mp3',
     'play_time': {
       'totalMilliseconds': 631000,
     }
@@ -22,7 +24,7 @@ const songs = [
     'title': 'Fifteen (Taylor\'s Version)',
     'artist_name': 'Taylor Swift',
     'album_image': 'https://media.pitchfork.com/photos/618c3ab295b32339a9955837/1:1/w_450%2Cc_limit/Taylor-Swift-Red-Taylors-Version.jpeg',
-    'path': 'https://drive.google.com/uc?id=1-26m-7cDC5Phl1hpWHWypsBzv6h-DAOp',
+    'path': 'https://audio.jukehost.co.uk/SjbxoNYrnKBNzg3arMMhRnar5iThcq8i',
     'play_time': {
       'totalMilliseconds': 294000,
     }
@@ -31,7 +33,7 @@ const songs = [
     'title': 'White Horse (Taylor\'s Version)',
     'artist_name': 'Taylor Swift',
     'album_image': 'https://media.pitchfork.com/photos/618c3ab295b32339a9955837/1:1/w_450%2Cc_limit/Taylor-Swift-Red-Taylors-Version.jpeg',
-    'path': 'https://drive.google.com/uc?id=1ReDp5pVJOScPhx8T4vt_fFVk2v5kpC5_',
+    'path': 'https://audio.jukehost.co.uk/co3zem5htSDPumdq69QmPxKbjQGQD6Xt',
     'play_time': {
       'totalMilliseconds': 234515,
     }
@@ -40,7 +42,7 @@ const songs = [
     'title': 'You Belong With Me (Taylor\'s Version)',
     'artist_name': 'Taylor Swift',
     'album_image': 'https://media.pitchfork.com/photos/606f5e145aedaea021481c20/1:1/w_450%2Cc_limit/Taylor-Swift-Fearless.jpeg',
-    'path': 'https://drive.google.com/uc?id=1FuBmYp6hLAkpsNQI8K6Qc7xr_QZ6xu7l',
+    'path': 'https://audio.jukehost.co.uk/VWxwuBxfuH8KahFkjixLBeF6TxfbzoE2',
     'play_time': {
       'totalMilliseconds': 231124,
     }
@@ -49,7 +51,7 @@ const songs = [
     'title': 'Taylor Swift feat Ed Sheeran Run (Taylor\'s Version)',
     'artist_name': 'Taylor Swift',
     'album_image': 'https://media.pitchfork.com/photos/618c3ab295b32339a9955837/1:1/w_450%2Cc_limit/Taylor-Swift-Red-Taylors-Version.jpeg',
-    'path': 'https://drive.google.com/uc?id=1Xs93M7RPfkvONAJBzcMYzcsziSfkspTQ',
+    'path': 'https://audio.jukehost.co.uk/8D3QgPpShcH7cwN2FIH6WWdgU5P0lzjP',
     'play_time': {
       'totalMilliseconds': 240226,
     }
@@ -57,11 +59,13 @@ const songs = [
 ];
 
 const global = {
+  RAPID_API_GENIUS_KEY_6: "c867eb843dmsh5d2c75173a93ae9p1d3126jsn710deb283144", // RESERVE
   RAPID_API_GENIUS_KEY_5: '9cd319bd1cmsh79215895bb207c5p1ddb19jsn0e180cb44dc2', // RESERVE
   RAPID_API_GENIUS_KEY_4: '6410687375msh748b1fadd4e39eep16ff3ajsn7c2799968395', // RESERVE
   RAPID_API_GENIUS_KEY_3: '96cc313bc6msh9eed516118e6dc5p138fc1jsnf057e04f103d', // ALMOST REACHED 90
   RAPID_API_GENIUS_KEY_2: '89a844fbd9mshf5d9827da1f4d6cp1576c5jsn002121fd8bd2', // CALL LIMIT REACHED
   RAPID_API_GENIUS_KEY_1: '57027509admsh3f917f0e5c3e343p1317bcjsn6762b68bc036', // CALL LIMIT REACHED
+  RAPID_API_SPOTIFY_KEY_6: "c867eb843dmsh5d2c75173a93ae9p1d3126jsn710deb283144", // RESERVE
   RAPID_API_SPOTIFY_KEY_5: '9cd319bd1cmsh79215895bb207c5p1ddb19jsn0e180cb44dc2', // RESEVE
   RAPID_API_SPOTIFY_KEY_4: '6410687375msh748b1fadd4e39eep16ff3ajsn7c2799968395', // RESERVE
   RAPID_API_SPOTIFY_KEY_3: '96cc313bc6msh9eed516118e6dc5p138fc1jsnf057e04f103d', // CALL LIMIT REACHED
